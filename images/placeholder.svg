@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Chưa có ảnh sản phẩm">
+  <rect width="400" height="300" fill="#f4f4f6" />
+  <rect x="16" y="16" width="368" height="268" rx="12" fill="#ffffff" stroke="#e4e4e7" stroke-width="2" stroke-dasharray="6 6" />
+  <g transform="translate(200 128)" fill="none" stroke="#7a2e4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.75">
+    <path d="M0 32V8" />
+    <path d="M0 8c-12-4-20-16-14-26 6-10 18-8 14 4 4-12 16-14 22-4 6 10-2 22-22 26Z" fill="#7a2e4d" fill-opacity="0.12" />
+    <path d="M0 24c-10 0-16-6-18-12 8-2 15 2 18 12Z" fill="#007a55" fill-opacity="0.14" stroke="#007a55" />
+    <path d="M0 20c10 0 16-6 18-12-8-2-15 2-18 12Z" fill="#007a55" fill-opacity="0.14" stroke="#007a55" />
+  </g>
+  <text x="200" y="205" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#52525c">Hanamiao Flower Shop</text>
+  <text x="200" y="227" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#707070">Chưa có hình ảnh</text>
+</svg>
+

@@ -1,0 +1,159 @@
+/* ==========================================================================
+ * FILE: css/tokens.css
+ * Design Tokens chuẩn cho hệ thống Quản lý Tiệm hoa Hanamiao (Storefront & Admin)
+ * Nạp Google Fonts Inter trong <head> hoặc self-host trước file này.
+ * ĐỔI THƯƠNG HIỆU: chỉ sửa khối FONT và MÀU NHẤN bên dưới.
+ * ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ===== FONT CHỮ DUY NHẤT (hỗ trợ đầy đủ tiếng Việt) =====
+     Phân vai bằng font-weight: body 400, nhãn phụ/nút 500, tiêu đề/số liệu 600, trang/giá nổi bật 700 */
+  --app-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* ===== MÀU NHẤN THƯƠNG HIỆU HANAMIAO ===== */
+  --primary: #7a2e4d;                   /* Tông mận hoa trang nhã, tương phản 9.03:1 trên trắng */
+  --primary-hover: #63233d;             /* Đậm hơn khi rê chuột */
+  --primary-foreground: #ffffff;        /* Chữ trên nền --primary */
+  --primary-light: rgba(122, 46, 77, 0.08); /* Nền nhạt cho badge/active có sắc */
+
+  /* ===== BỀ MẶT & CHỮ (NỀN SÁNG - FLAT DESIGN) ===== */
+  --background: #f4f4f6;                /* Nền trang xám nhạt */
+  --surface: #ffffff;                   /* Nền card, ô nhập, header, sidebar */
+  --surface-overlay: #ffffff;           /* Nền lớp nổi (dropdown, popover, modal) */
+  --foreground: #2c2c2c;                /* Chữ chính */
+  --muted: #707070;                     /* Chữ phụ, nhãn, placeholder (WCAG AA >= 4.5:1) */
+
+  /* ===== VIỀN (TỐI ĐA 2 TOKEN VIỀN + VIỀN FOCUS) ===== */
+  --border: #f0f0f3;                    /* Đường tóc chia khối, viền card, vạch menu */
+  --border-strong: #e4e4e7;             /* Viền ô nhập, nút outline, khung chia chính */
+  --border-focus: var(--primary);       /* Viền ô nhập khi focus */
+  --ring-focus: rgba(122, 46, 77, 0.12);/* Vòng focus 2px cho input/select/textarea */
+
+  /* ===== TRẠNG THÁI TƯƠNG TÁC (HOVER / ACTIVE) ===== */
+  --item-hover: #f4f4f6;                /* Nền rê của mục menu, sidebar link */
+  --surface-hover: #f8f8fa;             /* Nền rê của dòng bảng tràn bề ngang */
+  --background-hover: #e7e7ea;          /* Nền ô nhỏ nằm trong dòng đang hover */
+  --secondary: #e7e8ec;                 /* Nút phụ, mục sidebar đang chọn */
+  --secondary-hover: #dbdce2;           /* Nền rê nút phụ */
+  --button-hover-surface: #f1f1f3;      /* Nền rê nút viền trên nền trắng */
+  --button-hover-page: #e4e4e7;         /* Nền rê nút viền trên nền trang */
+  --button-hover: var(--button-hover-surface);
+
+  /* ===== ĐỔ BÓNG (CHỈ DÙNG CHO LỚP NỔI) ===== */
+  --elevation-popover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --elevation-modal: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* ===== MÀU TRẠNG THÁI NGỮ NGHĨA (SEMANTIC) ===== */
+  /* Nguy hiểm — xóa, khóa tài khoản, hủy đơn, đăng xuất */
+  --danger: #c70036;
+  --danger-bg: rgb(255 32 86 / 0.1);
+  --danger-bg-hover: rgb(255 32 86 / 0.15);
+
+  /* Lỗi — nhập sai, validation, trạng thái Đã hủy */
+  --error: #fb2c36;
+  --error-ring: rgb(251 44 54 / 0.1);
+  --error-text: #e7000b;
+  --error-bg: #fef2f2;
+  --error-border: #ffc9c9;
+  --error-strong: #c10007;
+
+  /* Thành công / Cảnh báo / Trung lập */
+  --success-bg: #ecfdf5;
+  --success: #007a55;
+  --warning-bg: #fffbeb;
+  --warning: #bb4d00;
+  --neutral-bg: #f4f4f5;
+  --neutral: #52525c;
+
+  /* ===== THANG CỠ CHỮ (7 BẬC CHUẨN) ===== */
+  --text-xs: 0.75rem;                   /* 12px: nhãn nhỏ, thời gian */
+  --text-sm: 0.875rem;                  /* 14px: mặc định nội dung, bảng, nút */
+  --text-base: 1rem;                    /* 16px: tiêu đề card */
+  --text-lg: 1.125rem;                  /* 18px: tiêu đề khối/section */
+  --text-xl: 1.25rem;                   /* 20px: tên trang trong app */
+  --text-2xl: 1.5rem;                   /* 24px: số liệu card thống kê */
+  --text-3xl: 1.875rem;                 /* 30px: hero / giá nổi bật */
+
+  /* ===== THANG KHOẢNG CÁCH (4 / 8 / 12 / 16 / 20 / 24 / 32 / 40) ===== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* ===== BO GÓC (THEO CHIỀU CAO PHẦN TỬ) ===== */
+  --radius-sm: 8px;                     /* Phần tử nhỏ < 40px: nút nhỏ, badge, item menu */
+  --radius-md: 10px;                    /* Ô nhập, nút chuẩn >= 40px */
+  --radius-lg: 12px;                    /* Card, panel, modal */
+  --radius-full: 9999px;                /* Pill, avatar */
+
+  /* ===== CHUYỂN ĐỘNG ===== */
+  --transition-fast: 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-base: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Reset cơ bản & làm mịn chữ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--app-font);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--foreground);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Số liệu căn thẳng cột */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Thanh cuộn tự ẩn gọn nhẹ, giữ chỗ 4px không làm nhảy layout */
+* {
+  --scrollbar-thumb: transparent;
+}
+
+*:hover {
+  --scrollbar-thumb: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--foreground) 36%, transparent);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  *:hover {
+    scrollbar-color: color-mix(in srgb, var(--foreground) 18%, transparent) transparent;
+  }
+}
+
