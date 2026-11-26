@@ -1,2 +1,0 @@
-Quản trị viên: admin / admin123
-Nhân viên: nhanvien / nv123456
