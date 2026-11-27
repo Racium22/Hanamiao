@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 /**
  * FILE: admin/index.php
- * Bộ định tuyến trung tâm khu vực Quản trị Hanamiao (độc lập giao diện & có bảo vệ đăng nhập).
+ * Bộ định tuyến trung tâm khu vực Quản trị Hanamiao (độc lập giao diện, bảo vệ đăng nhập & tích hợp Thông báo).
  */
 
 require_once __DIR__ . '/../config/auth.php';
@@ -16,9 +16,23 @@ requireAdminLogin('login.php');
 
 $currentAdmin = getCurrentAdmin();
 
+// Đánh dấu đã đọc khi mở thông báo từ panel chuông trên Header
+if (isset($_GET['read_noti']) && is_string($_GET['read_noti'])) {
+    $notiKey = trim($_GET['read_noti']);
+    if ($notiKey !== '' && preg_match('/^[a-z0-9_]+$/i', $notiKey)) {
+        if (!isset($_SESSION['admin_read_notis']) || !is_array($_SESSION['admin_read_notis'])) {
+            $_SESSION['admin_read_notis'] = [];
+        }
+        if (!in_array($notiKey, $_SESSION['admin_read_notis'], true)) {
+            $_SESSION['admin_read_notis'][] = $notiKey;
+        }
+    }
+}
+
 // Whitelist các trang quản trị
 $adminPages = [
     'dashboard' => ['file' => 'pages/dashboard.php', 'title' => 'Tổng quan', 'roles' => ['admin', 'nhanvien']],
+    'notifications' => ['file' => 'pages/notifications.php', 'title' => 'Trung tâm thông báo', 'roles' => ['admin', 'nhanvien']],
     'orders' => ['file' => 'pages/orders.php', 'title' => 'Quản lý đơn hàng', 'roles' => ['admin', 'nhanvien']],
     'product_types' => ['file' => 'pages/product_types.php', 'title' => 'Loại sản phẩm', 'roles' => ['admin', 'nhanvien']],
     'products' => ['file' => 'pages/products.php', 'title' => 'Sản phẩm hoa', 'roles' => ['admin', 'nhanvien']],
@@ -48,8 +62,21 @@ $pageTitle = $page === 'not_found'
 
 $pdo = null;
 $dbError = '';
+$adminNotifications = [];
+$unreadNotiCount = 0;
+
+$readNotiKeys = isset($_SESSION['admin_read_notis']) && is_array($_SESSION['admin_read_notis'])
+    ? $_SESSION['admin_read_notis']
+    : [];
+
 try {
     $pdo = getConnection();
+    $adminNotifications = getAdminNotifications($pdo, $readNotiKeys);
+    foreach ($adminNotifications as $n) {
+        if (!$n['is_read']) {
+            $unreadNotiCount++;
+        }
+    }
 } catch (PDOException $exception) {
     error_log('[Hanamiao Admin DB] ' . $exception->getMessage());
     $dbError = 'Không thể kết nối cơ sở dữ liệu hanamiao_db.';
@@ -63,11 +90,16 @@ require __DIR__ . '/components/header.php';
     <?php require __DIR__ . '/components/sidebar.php'; ?>
 
     <main class="admin-main" id="adminMain">
-        <?php if ($flash !== null): ?>
-            <div class="admin-alert admin-alert-<?php echo h($flash['type']); ?>" role="status">
-                <?php echo h($flash['message']); ?>
-            </div>
-        <?php endif; ?>
+        <div class="admin-toast-region" aria-live="polite">
+            <?php if ($flash !== null): ?>
+                <div class="admin-alert admin-alert-dismissible admin-alert-<?php echo h($flash['type']); ?>" data-toast-auto="<?php echo $flash['type'] === 'success' ? '1' : '0'; ?>">
+                    <span class="admin-alert-text"><?php echo h($flash['message']); ?></span>
+                    <button type="button" class="admin-alert-close" data-dismiss-alert aria-label="Đóng thông báo">
+                        <i data-lucide="x" class="admin-btn-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            <?php endif; ?>
+        </div>
 
         <?php if ($dbError !== ''): ?>
             <div class="admin-alert admin-alert-error" role="alert">
@@ -96,7 +128,7 @@ require __DIR__ . '/components/header.php';
                 ?>
                 <section class="admin-card admin-empty">
                     <h1 class="admin-page-title"><?php echo h($pageTitle); ?></h1>
-                    <p class="admin-muted">Phân hệ này đã được khai báo trong lộ trình Phase 3 / Phase 4 và sẽ được triển khai ở bước tiếp theo.</p>
+                    <p class="admin-muted">Phân hệ này đang được cập nhật.</p>
                     <a class="admin-btn admin-btn-outline" href="index.php?page=dashboard">Quay lại tổng quan</a>
                 </section>
                 <?php
@@ -106,4 +138,3 @@ require __DIR__ . '/components/header.php';
     </main>
 </div>
 <?php require __DIR__ . '/components/footer.php'; ?>
-

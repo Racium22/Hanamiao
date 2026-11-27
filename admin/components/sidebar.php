@@ -10,6 +10,7 @@ $navGroups = [
     'Vận hành' => [
         'dashboard' => ['label' => 'Tổng quan', 'icon' => 'layout-dashboard'],
         'orders' => ['label' => 'Đơn hàng', 'icon' => 'shopping-bag'],
+        'notifications' => ['label' => 'Thông báo', 'icon' => 'bell', 'badge' => (int)($unreadNotiCount ?? 0)],
     ],
     'Sản phẩm & Giá' => [
         'product_types' => ['label' => 'Loại sản phẩm', 'icon' => 'folder-tree'],
@@ -47,7 +48,10 @@ if ($isAdminRole) {
                                 href="index.php?page=<?php echo h($key); ?>"
                             >
                                 <i data-lucide="<?php echo h($item['icon']); ?>" class="admin-nav-icon" aria-hidden="true"></i>
-                                <span><?php echo h($item['label']); ?></span>
+                                <span class="admin-nav-text"><?php echo h($item['label']); ?></span>
+                                <?php if (!empty($item['badge'])): ?>
+                                    <span class="admin-nav-count tabular-nums"><?php echo (int)$item['badge']; ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                     <?php endforeach; ?>
