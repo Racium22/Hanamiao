@@ -6,6 +6,7 @@ Hệ thống web quản lý tiệm hoa **Hanamiao** được xây dựng bằng 
 > 1. Tài liệu này (`README.md`) để nắm tổng quan & dựng lại môi trường chạy trong 5 phút.
 > 2. [QUY_TAC_DU_AN.md](QUY_TAC_DU_AN.md) để nắm cây thư mục, quy tắc code, bảo mật PDO và chuẩn UI/UX.
 > 3. [KE_HOACH_DU_AN.md](KE_HOACH_DU_AN.md) để xem tiến độ, các giai đoạn (Phase/Wave) và nhận đầu việc trong checklist.
+4. Aihihi
 
 ---
 
