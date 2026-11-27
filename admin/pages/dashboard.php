@@ -120,7 +120,11 @@ if ($pdo instanceof PDO) {
                         <?php foreach ($recentOrders as $order): ?>
                             <?php $statusMeta = getOrderStatusMeta((string)$order['TrangThaiDon']); ?>
                             <tr>
-                                <td class="tabular-nums font-medium">#DH<?php echo str_pad((string)$order['ID_DH'], 4, '0', STR_PAD_LEFT); ?></td>
+                                <td class="tabular-nums font-medium">
+                                    <a class="admin-link" href="index.php?page=orders&amp;view=<?php echo (int)$order['ID_DH']; ?>">
+                                        #DH<?php echo str_pad((string)$order['ID_DH'], 4, '0', STR_PAD_LEFT); ?>
+                                    </a>
+                                </td>
                                 <td>
                                     <div class="cell-primary"><?php echo h($order['TenKhach']); ?></div>
                                     <div class="cell-sub tabular-nums"><?php echo h($order['SDTKhach']); ?></div>

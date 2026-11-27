@@ -90,5 +90,49 @@
       recalcTotals();
     });
   });
-})();
 
+  // 5. Panel thông báo trên Header Admin (mở tại chỗ, đóng bằng Esc hoặc click ra ngoài)
+  var notiToggle = document.getElementById('adminNotiToggle');
+  var notiPanel = document.getElementById('adminNotiPanel');
+  if (notiToggle && notiPanel) {
+    function setNotiOpen(isOpen) {
+      notiPanel.hidden = !isOpen;
+      notiToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    notiToggle.addEventListener('click', function (event) {
+      event.stopPropagation();
+      setNotiOpen(notiPanel.hidden);
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!notiPanel.hidden && !notiPanel.contains(event.target) && event.target !== notiToggle) {
+        setNotiOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !notiPanel.hidden) {
+        setNotiOpen(false);
+        notiToggle.focus();
+      }
+    });
+  }
+
+  // 6. Đóng & tự ẩn thông báo phản hồi (Flash / Toast)
+  document.querySelectorAll('[data-dismiss-alert]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var box = btn.closest('.admin-alert');
+      if (box) box.remove();
+    });
+  });
+
+  document.querySelectorAll('.admin-alert[data-toast-auto="1"]').forEach(function (box) {
+    window.setTimeout(function () {
+      box.classList.add('is-fading');
+      window.setTimeout(function () {
+        box.remove();
+      }, 260);
+    }, 5000);
+  });
+})();
